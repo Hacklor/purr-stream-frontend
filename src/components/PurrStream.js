@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Purr from './Purr';
 
 class PurrStream extends Component {
   render() {
@@ -15,12 +16,7 @@ class PurrStream extends Component {
     return (
       <div className="cards">
         { purrs.map((purr, key) =>
-          <div key={key} className="card">
-            <div className="card-body">
-              <h3 className="card-title">{purr.author}</h3>
-              <p className="card-text">{purr.content}</p>
-            </div>
-          </div>
+          <Purr key={key} purr={purr} />
         ) }
       </div>
     )
