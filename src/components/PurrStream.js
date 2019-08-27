@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 
 class PurrStream extends Component {
   render() {
-    if (!this.props.purrs || this.props.purrs.length <= 0) {
+    const purrs = this.props.purrs
+
+    if (!purrs || purrs.length <= 0) {
       return (
         <div className="alert alert-warning" role="alert">
           No purrs present
@@ -10,7 +12,6 @@ class PurrStream extends Component {
       )
     }
 
-    const purrs = this.props.purrs
     return (
       <div className="card">
         <div className="card-body">
