@@ -16,4 +16,17 @@ describe('PurrStream', () => {
       expect(queryByText('No purrs present')).not.toBeNull()
     })
   })
+
+  describe('purrs are present', () => {
+    it('shows a single purr', () => {
+      const purrs = [
+        { id: 1, author: 'AuthorA', content: 'Content of the purr' }
+      ]
+      const { queryByText } = render(<PurrStream purrs={ purrs } />)
+
+      expect(queryByText('AuthorA')).not.toBeNull()
+      expect(queryByText('Content of the purr')).not.toBeNull()
+    })
+  })
 })
+
