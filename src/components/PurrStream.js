@@ -12,9 +12,11 @@ class PurrStream extends Component {
 
     const purrs = this.props.purrs
     return (
-      <div>
-        <h3>{purrs[0].author}</h3>
-        <p>{purrs[0].content}</p>
+      <div className="card">
+        <div className="card-body">
+          <h3 className="card-title">{purrs[0].author}</h3>
+          <p className="card-text">{purrs[0].content}</p>
+        </div>
       </div>
     )
   }
