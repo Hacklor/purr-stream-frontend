@@ -27,6 +27,20 @@ describe('PurrStream', () => {
       expect(queryByText('AuthorA')).not.toBeNull()
       expect(queryByText('Content of the purr')).not.toBeNull()
     })
+
+    it('shows multiple purrs', () => {
+      const purrs = [
+        { id: 1, author: 'AuthorA', content: 'Content of the purr 1' },
+        { id: 2, author: 'AuthorB', content: 'Content of the purr 2' },
+        { id: 3, author: 'AuthorC', content: 'Content of the purr 3' }
+      ]
+      const { queryByText } = render(<PurrStream purrs={ purrs } />)
+
+      purrs.forEach(p => {
+        expect(queryByText(p.author)).not.toBeNull()
+        expect(queryByText(p.content)).not.toBeNull()
+      })
+    })
   })
 })
 

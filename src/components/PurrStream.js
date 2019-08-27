@@ -13,11 +13,15 @@ class PurrStream extends Component {
     }
 
     return (
-      <div className="card">
-        <div className="card-body">
-          <h3 className="card-title">{purrs[0].author}</h3>
-          <p className="card-text">{purrs[0].content}</p>
-        </div>
+      <div className="cards">
+        { purrs.map((purr, key) =>
+          <div key={key} className="card">
+            <div className="card-body">
+              <h3 className="card-title">{purr.author}</h3>
+              <p className="card-text">{purr.content}</p>
+            </div>
+          </div>
+        ) }
       </div>
     )
   }
