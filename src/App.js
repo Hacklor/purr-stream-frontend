@@ -1,11 +1,14 @@
 import React from 'react';
 import './App.css';
+import PurrStream from './components/PurrStream';
 
 function App() {
   return (
     <div className="container">
-      <div className="alert alert-primary" role="alert">
-        Yay! We have bootstrap!
+      <div className="row">
+        <div className="col">
+          <PurrStream />
+        </div>
       </div>
     </div>
   );
