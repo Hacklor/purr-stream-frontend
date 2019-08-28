@@ -3,12 +3,36 @@ import './App.css';
 import PurrStream from './components/PurrStream';
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      purrs: []
+    }
+  }
+
+  componentDidMount() {
+    fetch("http://example.com")
+      .then(response => {
+        return response.json();
+      })
+      .then(json => {
+        this.setState(() => {
+          return { purrs: json };
+        })
+      })
+  }
+
   render() {
+    const purrs = this.state.purrs
+
+    console.log(purrs)
+
     return (
       <div className="container">
         <div className="row">
           <div className="col">
-            <PurrStream />
+            <PurrStream purrs={purrs} />
           </div>
         </div>
       </div>
