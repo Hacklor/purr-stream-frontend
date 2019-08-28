@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { act } from "react-dom/test-utils";
+import { wait } from '@testing-library/dom'
 import App from './App';
 
 jest.mock('./components/PurrStream')
@@ -26,14 +26,10 @@ describe('App', () => {
   })
 
   it('passes the purrs as props', async () => {
-    console.log("1")
-    const { queryByText } = await render(<App />)
-    console.log("2")
+    const { queryByText } = render(<App />)
 
-    await Promise.resolve()
-    console.log("3")
-
-    expect(queryByText(JSON.stringify(fakePurrs))).toBeTruthy()
-    console.log("4")
+    await wait(() => {
+      expect(queryByText(JSON.stringify(fakePurrs))).toBeTruthy()
+    })
   })
 })

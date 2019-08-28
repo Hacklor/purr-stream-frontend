@@ -2,7 +2,7 @@ import React from 'react'
 
 export const PurrStream = ({ ...props }) => (
  <div>
-   { JSON.stringify(props) }
+   { JSON.stringify(props.purrs) }
  </div>
 )
 

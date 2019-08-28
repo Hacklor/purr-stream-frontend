@@ -26,8 +26,6 @@ class App extends Component {
   render() {
     const purrs = this.state.purrs
 
-    console.log(purrs)
-
     return (
       <div className="container">
         <div className="row">
