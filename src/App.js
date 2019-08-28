@@ -12,7 +12,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("http://example.com")
+    fetch("http://localhost:8000/purrs")
       .then(response => {
         return response.json();
       })
