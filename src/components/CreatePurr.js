@@ -6,7 +6,8 @@ class CreatePurr extends Component {
     super(props)
 
     this.state = {
-        author: ''
+        author: '',
+        content: ''
     }
 
     this.handleFormChange = this.handleFormChange.bind(this)
@@ -25,6 +26,10 @@ class CreatePurr extends Component {
             <label>
                 Author:
                 <input type="text" value={this.state.author} onChange={this.handleFormChange} />
+            </label>
+            <label>
+                Content:
+                <input type="text" value={this.state.content} onChange={this.handleFormChange} />
             </label>
         </form>
     )
