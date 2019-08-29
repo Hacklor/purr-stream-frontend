@@ -20,15 +20,12 @@ class CreatePurr extends Component {
     const name = event.target.name;
     const value = event.target.value;
 
-    console.log("name: " + name)
-    console.log("value: " + value)
-
     this.setState({[name]: value})
   }
 
   handleSubmit(event) {
     event.preventDefault()
-    
+
     const purr = this.state
     this.purrService.create(purr)
   }
