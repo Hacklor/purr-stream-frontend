@@ -37,9 +37,9 @@ describe('PurrStream', () => {
 
   describe('with real PurrService', () => {
     const fakePurrs = [
-      { id: 1, author: 'AuthorA', content: 'Content of the purr 1' },
-      { id: 2, author: 'AuthorB', content: 'Content of the purr 2' },
-      { id: 3, author: 'AuthorC', content: 'Content of the purr 3' }
+      { id: 1, author: 'AuthorA', content: 'Content of the purr 1', created_at: '"2019-08-29T16:22:46.158792Z"' },
+      { id: 2, author: 'AuthorB', content: 'Content of the purr 2', created_at: '"2019-08-28T16:22:46.158792Z"' },
+      { id: 3, author: 'AuthorC', content: 'Content of the purr 3', created_at: '"2019-08-27T16:22:46.158792Z"' }
     ]
 
     beforeEach(() => {
