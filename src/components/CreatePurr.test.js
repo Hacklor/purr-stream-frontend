@@ -3,8 +3,11 @@ import { render, fireEvent, wait } from '@testing-library/react';
 import CreatePurr from './CreatePurr';
 
 describe('CreatePurr', () => {
-    it('renders an instance', () => {
-        render(<CreatePurr />)
+    it('renders with empty fields', () => {
+        const { getByLabelText } = render(<CreatePurr />)
+
+        expect(getByLabelText('Author:').value).toEqual('')
+        expect(getByLabelText('Content:').value).toEqual('')
     })
 
     it('fills the form', () => {
