@@ -5,21 +5,21 @@ import PurrService from '../service/PurrService';
 
 describe('CreatePurr', () => {
     it('renders with empty fields', () => {
-        const { getByLabelText } = render(<CreatePurr />)
+        const { getByTestId } = render(<CreatePurr />)
 
-        expect(getByLabelText('Author:').value).toEqual('')
-        expect(getByLabelText('Content:').value).toEqual('')
+        expect(getByTestId('author').value).toEqual('')
+        expect(getByTestId('content').value).toEqual('')
     })
 
     it('fills the form', () => {
-        const { getByLabelText } = render(<CreatePurr />)
+        const { getByTestId } = render(<CreatePurr />)
 
-        fireEvent.change(getByLabelText('Author:'), { value: 'NewAuthor' })
-        fireEvent.change(getByLabelText('Content:'), { value: 'NewContent' })
+        fireEvent.change(getByTestId('author'), { value: 'NewAuthor' })
+        fireEvent.change(getByTestId('content'), { value: 'NewContent' })
 
         wait(() => {
-            expect(getByLabelText('Author:').value).toEqual('NewAuthor')
-            expect(getByLabelText('Content:').value).toEqual('NewContent')
+            expect(getByTestId('author').value).toEqual('NewAuthor')
+            expect(getByTestId('content').value).toEqual('NewContent')
         })
     })
 
@@ -28,13 +28,13 @@ describe('CreatePurr', () => {
         const mockedPurrService = new PurrService();
         mockedPurrService.create = mockedCreate
 
-        const { getByLabelText, getByTestId } = render(<CreatePurr purrService={mockedPurrService} />)
-        fireEvent.change(getByLabelText('Author:'), { value: 'NewAuthor' })
-        fireEvent.change(getByLabelText('Content:'), { value: 'NewContent' })
+        const { getByTestId } = render(<CreatePurr purrService={mockedPurrService} />)
+        fireEvent.change(getByTestId('author'), { value: 'NewAuthor' })
+        fireEvent.change(getByTestId('content'), { value: 'NewContent' })
 
         wait(() => {
-            expect(getByLabelText('Author:').value).toEqual('NewAuthor')
-            expect(getByLabelText('Content:').value).toEqual('NewContent')
+            expect(getByTestId('author').value).toEqual('NewAuthor')
+            expect(getByTestId('content').value).toEqual('NewContent')
         })
 
         fireEvent.submit(getByTestId("form"))

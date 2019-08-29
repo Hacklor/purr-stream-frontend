@@ -32,17 +32,24 @@ class CreatePurr extends Component {
 
   render() {
     return (
+      <div className="mb-5">
+        <h2>Create a new purr</h2>
         <form onSubmit={this.handleSubmit} data-testid="form">
-            <label>
-                Author:
-                <input type="text" name="author" value={this.state.author} onChange={this.handleFormChange} />
-            </label>
-            <label>
-                Content:
-                <input type="text" name="content" value={this.state.content} onChange={this.handleFormChange} />
-            </label>
-            <button type="submit">Send Purr</button>
+          <div className="form-group row">
+            <label htmlFor="author" className="col-sm-2 col-form-label">Author:</label>
+            <div className="col-sm-10">
+              <input type="text" className="form-control" data-testid="author" name="author" value={this.state.author} onChange={this.handleFormChange} />
+            </div>
+          </div>
+          <div className="form-group row">
+            <label htmlFor="content" className="col-sm-2 col-form-label">Content:</label>
+            <div className="col-sm-10">
+              <input type="text" className="form-control" data-testid="content" name="content" value={this.state.content} onChange={this.handleFormChange} />
+            </div>
+          </div>
+          <button type="submit" className="btn btn-primary mb-2">Send Purr</button>
         </form>
+      </div>
     )
   }
 }

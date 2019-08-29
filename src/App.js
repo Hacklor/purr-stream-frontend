@@ -18,6 +18,11 @@ class App extends Component {
       <div className="container">
         <div className="row">
           <div className="col">
+            <h1><span role="img">😸</span> PurrStream</h1>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
             <CreatePurr purrService={this.purrService}/>
           </div>
         </div>
