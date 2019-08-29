@@ -10,6 +10,7 @@ class CreatePurr extends Component {
         content: ''
     }
 
+    this.handleSubmit = props.handleSubmit
     this.handleFormChange = this.handleFormChange.bind(this)
   }
 
@@ -22,7 +23,7 @@ class CreatePurr extends Component {
 
   render() {
     return (
-        <form>
+        <form onSubmit={this.handleSubmit} data-testid="form">
             <label>
                 Author:
                 <input type="text" value={this.state.author} onChange={this.handleFormChange} />
@@ -31,6 +32,7 @@ class CreatePurr extends Component {
                 Content:
                 <input type="text" value={this.state.content} onChange={this.handleFormChange} />
             </label>
+            <button type="submit">Send Purr</button>
         </form>
     )
   }

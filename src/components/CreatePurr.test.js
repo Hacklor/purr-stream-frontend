@@ -21,4 +21,15 @@ describe('CreatePurr', () => {
             expect(getByLabelText('Content:').value).toEqual('NewContent')
         })
     })
+
+    it('handles the submit', () => {
+        const mockedSubmit = jest.fn()
+
+        const { getByLabelText, getByTestId } = render(<CreatePurr handleSubmit={mockedSubmit} />)
+        fireEvent.change(getByLabelText('Author:'), { value: 'NewAuthor' })
+        fireEvent.change(getByLabelText('Content:'), { value: 'NewContent' })
+        fireEvent.submit(getByTestId("form"));
+
+        expect(mockedSubmit).toHaveBeenCalled();
+    })
 })
