@@ -31,7 +31,7 @@ describe('CreatePurr', () => {
         const { getByLabelText, getByTestId } = render(<CreatePurr purrService={mockedPurrService} />)
         fireEvent.change(getByLabelText('Author:'), { value: 'NewAuthor' })
         fireEvent.change(getByLabelText('Content:'), { value: 'NewContent' })
-        
+
         wait(() => {
             expect(getByLabelText('Author:').value).toEqual('NewAuthor')
             expect(getByLabelText('Content:').value).toEqual('NewContent')
