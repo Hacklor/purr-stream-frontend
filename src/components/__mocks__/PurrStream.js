@@ -1,9 +1,7 @@
 import React from 'react'
 
 export const PurrStream = ({ ...props }) => (
- <div>
-   { JSON.stringify(props.purrs) }
- </div>
+ <div>MockedPurrStream: { JSON.stringify(props) }</div>
 )
 
 export default PurrStream;

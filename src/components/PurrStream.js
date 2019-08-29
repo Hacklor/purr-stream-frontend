@@ -2,8 +2,25 @@ import React, { Component } from 'react';
 import Purr from './Purr';
 
 class PurrStream extends Component {
+
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      purrs: []
+    }
+
+    this.purrService = props.purrService
+  }
+
+  componentDidMount() {
+    this.purrService.list(
+      (json) => { this.setState({ purrs: json }) }
+    )
+  }
+
   render() {
-    const purrs = this.props.purrs
+    const purrs = this.state.purrs
 
     if (!purrs || purrs.length <= 0) {
       return (
