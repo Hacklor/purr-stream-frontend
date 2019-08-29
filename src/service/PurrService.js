@@ -1,7 +1,13 @@
 class PurrService {
     create(data) {
-        console.log("create: to be implemented")
-        console.log(data)
+        fetch("http://localhost:8000/purrs/", {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
     }
 
     list() {

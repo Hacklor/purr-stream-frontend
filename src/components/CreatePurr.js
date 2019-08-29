@@ -16,9 +16,12 @@ class CreatePurr extends Component {
     this.handleFormChange = this.handleFormChange.bind(this)
   }
 
-  handleFormChange() {
-    const name = target.name;
-    const value = target.value;
+  handleFormChange(event) {
+    const name = event.target.name;
+    const value = event.target.value;
+
+    console.log("name: " + name)
+    console.log("value: " + value)
 
     this.setState({[name]: value})
   }
@@ -35,11 +38,11 @@ class CreatePurr extends Component {
         <form onSubmit={this.handleSubmit} data-testid="form">
             <label>
                 Author:
-                <input type="text" value={this.state.author} onChange={this.handleFormChange} />
+                <input type="text" name="author" value={this.state.author} onChange={this.handleFormChange} />
             </label>
             <label>
                 Content:
-                <input type="text" value={this.state.content} onChange={this.handleFormChange} />
+                <input type="text" name="content" value={this.state.content} onChange={this.handleFormChange} />
             </label>
             <button type="submit">Send Purr</button>
         </form>
