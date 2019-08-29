@@ -23,13 +23,22 @@ describe('CreatePurr', () => {
     })
 
     it('handles the submit', () => {
-        const mockedSubmit = jest.fn()
+        const mockedSubmitInternal = jest.fn()
 
-        const { getByLabelText, getByTestId } = render(<CreatePurr handleSubmit={mockedSubmit} />)
+        const { getByLabelText, getByTestId } = render(<CreatePurr handleSubmitInternal={mockedSubmitInternal} />)
         fireEvent.change(getByLabelText('Author:'), { value: 'NewAuthor' })
         fireEvent.change(getByLabelText('Content:'), { value: 'NewContent' })
-        fireEvent.submit(getByTestId("form"));
+        
+        wait(() => {
+            expect(getByLabelText('Author:').value).toEqual('NewAuthor')
+            expect(getByLabelText('Content:').value).toEqual('NewContent')
+        })
 
-        expect(mockedSubmit).toHaveBeenCalled();
+        fireEvent.submit(getByTestId("form"))
+
+        wait(() => {
+            expect(mockedSubmitInternal).toHaveBeenCalledTimes(1)
+            expect(mockedSubmitInternal).toHaveBeenCalledWith({author: 'NewAuthor', content: 'NewContent'})
+        })
     })
 })

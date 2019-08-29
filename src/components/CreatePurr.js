@@ -10,7 +10,9 @@ class CreatePurr extends Component {
         content: ''
     }
 
-    this.handleSubmit = props.handleSubmit
+    this.handleSubmitInternal = props.handleSubmitInternal
+
+    this.handleSubmit = this.handleSubmit.bind(this)
     this.handleFormChange = this.handleFormChange.bind(this)
   }
 
@@ -19,6 +21,13 @@ class CreatePurr extends Component {
     const value = target.value;
 
     this.setState({[name]: value})
+  }
+
+  handleSubmit(event) {
+    event.preventDefault()
+    
+    const purr = this.state
+    this.handleSubmitInternal(purr)
   }
 
   render() {
