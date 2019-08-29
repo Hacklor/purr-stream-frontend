@@ -9,11 +9,14 @@ class CreatePurr extends Component {
         author: ''
     }
 
-    this.handleAuthorChange = this.handleAuthorChange.bind(this)
+    this.handleFormChange = this.handleFormChange.bind(this)
   }
 
-  handleAuthorChange() {
-    this.setState({author: event.target.value})
+  handleFormChange() {
+    const name = target.name;
+    const value = target.value;
+
+    this.setState({[name]: value})
   }
 
   render() {
@@ -21,7 +24,7 @@ class CreatePurr extends Component {
         <form>
             <label>
                 Author:
-                <input type="text" value={this.state.author} onChange={this.handleAuthorChange} />
+                <input type="text" value={this.state.author} onChange={this.handleFormChange} />
             </label>
         </form>
     )
