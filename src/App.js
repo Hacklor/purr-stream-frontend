@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
+
+import PurrService from './service/PurrService';
+
 import PurrStream from './components/PurrStream';
+import CreatePurr from './components/CreatePurr';
 
 class App extends Component {
   constructor(props) {
@@ -9,6 +13,7 @@ class App extends Component {
     this.state = {
       purrs: []
     }
+    this.purrService = new PurrService()
   }
 
   componentDidMount() {
@@ -29,6 +34,9 @@ class App extends Component {
     return (
       <div className="container">
         <div className="row">
+          <div className="col">
+            <CreatePurr purrService={this.purrService}/>
+          </div>
           <div className="col">
             <PurrStream purrs={purrs} />
           </div>

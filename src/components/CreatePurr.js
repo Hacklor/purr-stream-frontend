@@ -10,7 +10,7 @@ class CreatePurr extends Component {
         content: ''
     }
 
-    this.handleSubmitInternal = props.handleSubmitInternal
+    this.purrService = props.purrService
 
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleFormChange = this.handleFormChange.bind(this)
@@ -27,7 +27,7 @@ class CreatePurr extends Component {
     event.preventDefault()
     
     const purr = this.state
-    this.handleSubmitInternal(purr)
+    this.purrService.create(purr)
   }
 
   render() {

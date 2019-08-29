@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, fireEvent, wait } from '@testing-library/react';
 import CreatePurr from './CreatePurr';
+import PurrService from '../service/PurrService';
 
 describe('CreatePurr', () => {
     it('renders with empty fields', () => {
@@ -23,9 +24,11 @@ describe('CreatePurr', () => {
     })
 
     it('handles the submit', () => {
-        const mockedSubmitInternal = jest.fn()
+        const mockedCreate = jest.fn()
+        const mockedPurrService = new PurrService();
+        mockedPurrService.create = mockedCreate
 
-        const { getByLabelText, getByTestId } = render(<CreatePurr handleSubmitInternal={mockedSubmitInternal} />)
+        const { getByLabelText, getByTestId } = render(<CreatePurr purrService={mockedPurrService} />)
         fireEvent.change(getByLabelText('Author:'), { value: 'NewAuthor' })
         fireEvent.change(getByLabelText('Content:'), { value: 'NewContent' })
         
@@ -37,8 +40,8 @@ describe('CreatePurr', () => {
         fireEvent.submit(getByTestId("form"))
 
         wait(() => {
-            expect(mockedSubmitInternal).toHaveBeenCalledTimes(1)
-            expect(mockedSubmitInternal).toHaveBeenCalledWith({author: 'NewAuthor', content: 'NewContent'})
+            expect(mockedCreate).toHaveBeenCalledTimes(1)
+            expect(mockedCreate).toHaveBeenCalledWith({author: 'NewAuthor', content: 'NewContent'})
         })
     })
 })
