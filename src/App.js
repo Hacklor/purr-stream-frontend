@@ -11,7 +11,7 @@ class App extends Component {
     super(props)
 
     // This should be configurable in a settings file
-    const backendUrl = "http://localhost:8000"
+    const backendUrl = process.env.REACT_APP_BACKEND_BASE_URL
     this.purrService = new PurrService(backendUrl)
   }
 
