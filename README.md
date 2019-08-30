@@ -33,4 +33,7 @@ If you would like to override you can create a `.env.local` file and place the f
 REACT_APP_BACKEND_BASE_URL=http://yoururlhere.com
 ```
 
-This will override the default. There is also a specific file for the test run named `.env.test
+This will override the default.
+
+Warning: Do not put secrets in the `.env` file, but only in the `.env.local`. The latter will be
+ignored by git.
