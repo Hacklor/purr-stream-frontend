@@ -1,23 +1,27 @@
 class PurrService {
-  create(data) {
-    fetch("http://localhost:8000/purrs/", {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(response => response.json())
+  constructor(base_url) {
+    this.url = base_url + "/purrs/"
   }
 
   list(callback) {
-    fetch("http://localhost:8000/purrs")
+    fetch(this.url)
       .then(response => {
         return response.json();
       })
       .then(json => {
         callback(json)
       })
+  }
+
+  create(data) {
+    fetch(this.url, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+       'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
   }
 
   destroy() {
