@@ -50,7 +50,7 @@ describe('PurrStream', () => {
     })
 
     afterEach(() => {
-      service.list.mockRestore();
+      service.list.mockRestore()
     })
 
     it('renders multiple purrs', async () => {

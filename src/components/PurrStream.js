@@ -41,7 +41,7 @@ class PurrStream extends Component {
             <div className="col">
               <Purr purr={purr} />
             </div>
-            <div className="col-4">
+            <div className="col-1">
               <DestroyPurr purr={purr} purrService={this.purrService} />
             </div>
           </div>
