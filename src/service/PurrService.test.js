@@ -1,20 +1,19 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { wait } from '@testing-library/dom'
 import PurrService from './PurrService';
 
 describe('PurrService', () => {
+  const base_url = "http://test"
+  const url = base_url + "/purrs/"
+  const service = new PurrService(base_url)
+
   describe('list', () => {
-    const fakePurrs = [
-      { id: 1, author: 'AuthorA', content: 'Content of the purr 1' },
-      { id: 2, author: 'AuthorB', content: 'Content of the purr 2' },
-      { id: 3, author: 'AuthorC', content: 'Content of the purr 3' }
-    ]
+    const purrs = "JSON WITH PURRS"
 
     beforeEach(() => {
       jest.spyOn(window, "fetch").mockImplementation(() => {
         const fetchResponse = {
-          json: () => Promise.resolve(fakePurrs)
+          json: () => Promise.resolve(purrs)
         };
         return Promise.resolve(fetchResponse);
       })
@@ -25,13 +24,66 @@ describe('PurrService', () => {
     })
 
     it('calls the callback with response', async () => {
-      const callback = jest.fn()
+      const actual = await service.list()
 
-      const service = new PurrService()
-      service.list(callback)
+      expect(window.fetch).toHaveBeenCalledWith(url)
+      expect(actual).toEqual(purrs)
+    })
+  })
 
-      wait(() => {
-        expect(callback).toHaveBeenCalled()
+  describe('create', () => {
+    const purr = { author: 'AuthorA', content: 'Content of the purr 1' }
+
+    beforeEach(() => {
+      jest.spyOn(window, "fetch").mockImplementation(() => {
+        const fetchResponse = {
+          json: () => Promise.resolve()
+        };
+        return Promise.resolve(fetchResponse);
+      })
+    })
+
+    afterEach(() => {
+      window.fetch.mockRestore();
+    })
+
+    it('posts the data to the server', async () => {
+      await service.create(purr)
+      expect(window.fetch).toHaveBeenCalledWith(url, {
+        method: 'POST',
+        body: JSON.stringify(purr),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+    })
+  })
+
+  describe('destroy', () => {
+    const id = 42
+
+    beforeEach(() => {
+      jest.spyOn(window, "fetch").mockImplementation(() => {
+        const fetchResponse = {
+          json: () => Promise.resolve()
+        };
+        return Promise.resolve(fetchResponse);
+      })
+    })
+
+    afterEach(() => {
+      window.fetch.mockRestore();
+    })
+
+    it('posts the data to the server', async () => {
+      await service.destroy(id)
+
+      const deleteUrl = url + id + '/'
+      expect(window.fetch).toHaveBeenCalledWith(deleteUrl, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
       })
     })
   })

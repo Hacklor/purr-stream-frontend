@@ -1,27 +1,31 @@
 class PurrService {
-  create(data) {
-    fetch("http://localhost:8000/purrs/", {
+  constructor(baseUrl) {
+    this.url = baseUrl + "/purrs/"
+  }
+
+  async list() {
+    const response = await fetch(this.url)
+    return await response.json()
+  }
+
+  async create(data) {
+    await fetch(this.url, {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {
-        'Content-Type': 'application/json'
+       'Content-Type': 'application/json'
       }
     })
-    .then(response => response.json())
   }
 
-  list(callback) {
-    fetch("http://localhost:8000/purrs")
-      .then(response => {
-        return response.json();
-      })
-      .then(json => {
-        callback(json)
-      })
-  }
-
-  destroy() {
-    console.log("destroy: to be implemented")
+  async destroy(id) {
+    const response = await fetch(this.url + id + '/', {
+      method: 'DELETE',
+      headers: {
+       'Content-Type': 'application/json'
+      }
+    })
+    return await response.json()
   }
 }
 

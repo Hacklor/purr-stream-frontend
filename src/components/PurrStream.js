@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Purr from './Purr';
+import DestroyPurr from './DestroyPurr';
 
 class PurrStream extends Component {
 
@@ -13,10 +14,13 @@ class PurrStream extends Component {
     this.purrService = props.purrService
   }
 
-  componentDidMount() {
-    this.purrService.list(
-      (json) => { this.setState({ purrs: json }) }
-    )
+  async componentDidMount() {
+    try {
+      const json = await this.purrService.list()
+      this.setState({ purrs: json })
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   render() {
@@ -31,9 +35,16 @@ class PurrStream extends Component {
     }
 
     return (
-      <div className="cards">
+      <div className="cards container">
         { purrs.map((purr, key) =>
-          <Purr key={key} purr={purr} />
+          <div key={key} className="row">
+            <div className="col">
+              <Purr purr={purr} />
+            </div>
+            <div className="col-1">
+              <DestroyPurr purr={purr} purrService={this.purrService} />
+            </div>
+          </div>
         ) }
       </div>
     )
