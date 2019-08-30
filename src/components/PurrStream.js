@@ -15,6 +15,21 @@ class PurrStream extends Component {
   }
 
   async componentDidMount() {
+    // Load for first time
+    this.loadPurrs()
+
+    // WARNING: DIRTY HACK
+    // This is quite a dirty hack, because it does a lot of unnecessary reloads
+    // But it is to prevent having to refactor everything to Redux right now
+    // But still have auto-refresh of the list
+    this.interval = setInterval( async () => await this.loadPurrs(), 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  async loadPurrs() {
     try {
       const json = await this.purrService.list()
       this.setState({ purrs: json })

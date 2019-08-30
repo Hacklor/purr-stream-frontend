@@ -19,13 +19,12 @@ class PurrService {
   }
 
   async destroy(id) {
-    const response = await fetch(this.url + id + '/', {
+    await fetch(this.url + id + '/', {
       method: 'DELETE',
       headers: {
        'Content-Type': 'application/json'
       }
     })
-    return await response.json()
   }
 }
 
