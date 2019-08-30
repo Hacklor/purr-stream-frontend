@@ -1,6 +1,6 @@
 class PurrService {
-  constructor(base_url) {
-    this.url = base_url + "/purrs/"
+  constructor(baseUrl) {
+    this.url = baseUrl + "/purrs/"
   }
 
   list(callback) {
@@ -24,8 +24,14 @@ class PurrService {
     .then(response => response.json())
   }
 
-  destroy() {
-    console.log("destroy: to be implemented")
+  destroy(id) {
+    fetch(this.url + id + '/', {
+      method: 'DELETE',
+      headers: {
+       'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
   }
 }
 

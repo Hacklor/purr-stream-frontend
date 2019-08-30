@@ -63,5 +63,31 @@ describe('PurrService', () => {
   })
 
   describe('destroy', () => {
+    const id = 42
+
+    beforeEach(() => {
+      jest.spyOn(window, "fetch").mockImplementation(() => {
+        const fetchResponse = {
+          json: () => Promise.resolve()
+        };
+        return Promise.resolve(fetchResponse);
+      })
+    })
+
+    afterEach(() => {
+      window.fetch.mockRestore();
+    })
+
+    it('posts the data to the server', async () => {
+      await service.destroy(id)
+
+      const deleteUrl = url + id + '/'
+      expect(window.fetch).toHaveBeenCalledWith(deleteUrl, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+    })
   })
 })

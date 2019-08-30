@@ -11,8 +11,8 @@ class App extends Component {
     super(props)
 
     // This should be configurable in a settings file
-    const backend_url = "http://localhost:8000"
-    this.purrService = new PurrService(backend_url)
+    const backendUrl = "http://localhost:8000"
+    this.purrService = new PurrService(backendUrl)
   }
 
   render() {
