@@ -26,5 +26,11 @@ Launches the test runner in the interactive watch mode. Of course all tests shou
 
 ### Setting custom url for Backend
 
-Currently the base url for the backend is set in `App.js` and it set to `http://localhost:8000`.
-If needed you can change it there
+There is a `.env` variable present with a default of `http://localhost:8000` to reach the backend.
+If you would like to override you can create a `.env.local` file and place the following code there:
+
+```bash
+REACT_APP_BACKEND_BASE_URL=http://yoururlhere.com
+```
+
+This will override the default. There is also a specific file for the test run named `.env.test

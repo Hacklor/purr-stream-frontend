@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import PurrService from './PurrService';
 
 describe('PurrService', () => {
-  const base_url = "http://test"
+  const base_url = "http://test.com"
   const url = base_url + "/purrs/"
   const service = new PurrService(base_url)
 
