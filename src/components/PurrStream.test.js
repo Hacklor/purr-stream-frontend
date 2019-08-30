@@ -1,10 +1,12 @@
 import React from 'react';
 import { render, wait } from '@testing-library/react';
 import PurrStream from './PurrStream';
+import DestroyPurr from './DestroyPurr';
 import PurrService from '../service/PurrService';
 
-describe('PurrStream', () => {
+jest.mock('./DestroyPurr')
 
+describe('PurrStream', () => {
   it('shows message when undefined', () => {
     const mockedList = jest.fn()
     const mockedPurrService = new PurrService();
@@ -35,35 +37,37 @@ describe('PurrStream', () => {
     expect(mockedList).toHaveBeenCalled()
   })
 
-  describe('with real PurrService', () => {
-    const fakePurrs = [
-      { id: 1, author: 'AuthorA', content: 'Content of the purr 1', created_at: '"2019-08-29T16:22:46.158792Z"' },
-      { id: 2, author: 'AuthorB', content: 'Content of the purr 2', created_at: '"2019-08-28T16:22:46.158792Z"' },
-      { id: 3, author: 'AuthorC', content: 'Content of the purr 3', created_at: '"2019-08-27T16:22:46.158792Z"' }
+  describe('with mocked PurrService', () => {
+    const service = new PurrService()
+    const purrs = [
+      { id: 1, author: 'AuthorA', content: 'Content of the purr 1' },
+      { id: 2, author: 'AuthorB', content: 'Content of the purr 2' },
+      { id: 3, author: 'AuthorC', content: 'Content of the purr 3' }
     ]
 
     beforeEach(() => {
-      jest.spyOn(window, "fetch").mockImplementation(() => {
-        const fetchResponse = {
-          json: () => Promise.resolve(fakePurrs)
-        };
-        return Promise.resolve(fetchResponse);
-      })
+      service.list = jest.fn(() => Promise.resolve(purrs))
     })
 
     afterEach(() => {
-      window.fetch.mockRestore();
+      service.list.mockRestore();
     })
 
-    it('renders multiple purrs', () => {
-      const purrService = new PurrService()
-      const { queryByText } = render(<PurrStream purrService={purrService} />)
+    it('renders multiple purrs', async () => {
+      const { queryByText } = await render(<PurrStream purrService={service} />)
 
-      wait(() => {
-        fakePurrs.forEach(p => {
-          expect(queryByText(p.author)).not.toBeNull()
-          expect(queryByText(p.content)).not.toBeNull()
-        })
+      purrs.forEach(p => {
+        expect(queryByText(p.author)).not.toBeNull()
+        expect(queryByText(p.content)).not.toBeNull()
+      })
+    })
+
+    it('renders the DestroyPurr for each purr', async () => {
+      const { queryByText, debug } = await render(<PurrStream purrService={service} />)
+
+      purrs.forEach(p => {
+        expect(queryByText("MockedDestroyPurr:" + p.id)).not.toBeNull()
+        expect(queryByText("Purrservice" + p.id + ":present")).not.toBeNull()
       })
     })
   })

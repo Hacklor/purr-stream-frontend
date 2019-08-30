@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const CreatePurr = ({ ...props }) => (
+const CreatePurr = ({ ...props }) => (
  <div>MockedCreatePurr: { JSON.stringify(props) }</div>
 )
 

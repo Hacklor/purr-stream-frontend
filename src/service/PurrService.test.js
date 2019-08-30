@@ -23,14 +23,11 @@ describe('PurrService', () => {
       window.fetch.mockRestore();
     })
 
-    it('calls the callback with response', done => {
-      const callback = (actual) => {
-        expect(window.fetch).toHaveBeenCalledWith(url)
-        expect(actual).toEqual(purrs)
-        done()
-      }
+    it('calls the callback with response', async () => {
+      const actual = await service.list()
 
-      service.list(callback)
+      expect(window.fetch).toHaveBeenCalledWith(url)
+      expect(actual).toEqual(purrs)
     })
   })
 
